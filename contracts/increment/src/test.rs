@@ -24,5 +24,8 @@ fn test() {
     assert_eq!(client.set_value(&69), 69);
     assert_eq!(client.get_current_value(), 69);
 
+    assert_eq!(client.increment_u64(), 1);
+    assert_eq!(client.get_current_value_u64(), 1);
+
     std::println!("{}", env.logs().all().join("\n"));
 }
