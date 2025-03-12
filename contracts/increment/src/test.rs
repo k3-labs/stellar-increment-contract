@@ -1,7 +1,10 @@
 #![cfg(test)]
 
 use super::{IncrementContract, IncrementContractClient};
-use soroban_sdk::{testutils::Logs, Env};
+use soroban_sdk::{
+    testutils::{Events, Logs},
+    Env,
+};
 
 extern crate std;
 
@@ -26,6 +29,9 @@ fn test() {
 
     assert_eq!(client.increment_u64(), 1);
     assert_eq!(client.get_current_value_u64(), 1);
-
+    let events = client.env.events().all();
+    for e in events {
+        std::dbg!(e);
+    }
     std::println!("{}", env.logs().all().join("\n"));
 }

@@ -19,6 +19,7 @@ impl IncrementContract {
 
         // Save the count.
         env.storage().persistent().set(&COUNTER, &count);
+        env.events().publish((symbol_short!("increment"), 1u32), count);
 
         // Return the count to the caller.
         count
@@ -31,6 +32,7 @@ impl IncrementContract {
         count -= 1;
 
         env.storage().persistent().set(&COUNTER, &count);
+        env.events().publish((symbol_short!("decrement"), 1u32), count);
 
         count
     }
@@ -42,6 +44,7 @@ impl IncrementContract {
         count += num;
 
         env.storage().persistent().set(&COUNTER, &count);
+        env.events().publish((symbol_short!("increment"), num), count);
 
         count
     }
@@ -53,6 +56,7 @@ impl IncrementContract {
         count -= num;
 
         env.storage().persistent().set(&COUNTER, &count);
+        env.events().publish((symbol_short!("decrement"), num), count);
 
         count
     }
@@ -64,6 +68,7 @@ impl IncrementContract {
         count = num;
 
         env.storage().persistent().set(&COUNTER, &count);
+        env.events().publish((symbol_short!("set_value"), num), count);
 
         count
     }
@@ -83,6 +88,7 @@ impl IncrementContract {
 
         // Save the count.
         env.storage().persistent().set(&COUNTER_64, &count);
+        env.events().publish((symbol_short!("inc_u64"), 1u64), count);
 
         // Return the count to the caller.
         count
@@ -95,6 +101,7 @@ impl IncrementContract {
         count -= 1;
 
         env.storage().persistent().set(&COUNTER_64, &count);
+        env.events().publish((symbol_short!("dec_u64"), 1u64), count);
 
         count
     }
@@ -105,7 +112,7 @@ impl IncrementContract {
 
         count += num;
 
-        env.storage().persistent().set(&COUNTER_64, &count);
+        env.storage().persistent().set(&COUNTER, &count);
 
         count
     }
