@@ -112,7 +112,7 @@ impl IncrementContract {
 
         count += num;
 
-        env.storage().persistent().set(&COUNTER, &count);
+        env.storage().persistent().set(&COUNTER_64, &count);
         env.events().publish((symbol_short!("inc_u64"), num), count);
 
         count
